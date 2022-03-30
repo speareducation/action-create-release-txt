@@ -1,0 +1,20 @@
+name: Create release.txt
+description: A GitHub action to create the release.txt file
+branding:
+  icon: check-circle
+  color: green
+inputs:
+  target:
+    description: The S3 Bucket
+    default: ./public/release.txt  
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Test Target Directory
+      shell: bash
+      run: test -d "$(dirname "${{ inputs.target }}")"
+
+    - name: Create release.txt
+      shell: bash
+      run: echo "${{ github.ref }} - ${{ github.sha }}" > "${{ inputs.target }}"
