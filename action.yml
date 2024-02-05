@@ -17,4 +17,4 @@ runs:
 
     - name: Create release.txt
       shell: bash
-      run: echo "${{ github.ref }} - ${{ github.sha }}" > "${{ inputs.target }}"
+      run: echo "${{ github.ref }} - ${{ github.sha }} - $(date -u +%FT%TZ)" > "${{ inputs.target }}"
